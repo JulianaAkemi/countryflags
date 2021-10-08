@@ -1,6 +1,6 @@
 ## The challenge
 
-Your challenge is to integrate with the [countrylayer API](http://countrylayer.com/) to pull country data and display it like in the designs. You can register as a free account, credit card information is not needed.
+Your challenge is to integrate with our [Countries API](https://wtt-countries.herokuapp.com/) to pull country data and display it like in the designs.
 
 You can use [React](https://reactjs.org) or [Vue](https://vuejs.org). You also have complete control over which packages you use to do things like make HTTP requests or style your project.
 
@@ -16,14 +16,12 @@ Your users should be able to:
 
 ## Where to find everything
 
-Your task is to build out the project using the following designs:
+Your task is to build out the project using the following designs on [Figma](https://www.figma.com/file/Sv3gUdgOviFrmgDQRj5dF5/Front-End-Test-01?node-id=0%3A1).
 
-[Desktop](https://marvelapp.com/prototype/92264ch/screens)
-[Mobile](https://marvelapp.com/prototype/6a1d0h4/screens)
 
 In this challenge, you will find mobile and desktop designs in light and dark mode color schemes for both pages.
 
-There are no assets for this challenge, as the country flags will be pulled from the [countrylayer API](http://countrylayer.com/) and you can use an icon font library for the icons.
+There are no assets for this challenge, as the country flags will be pulled from the [Countries API](https://wtt-countries.herokuapp.com/) and you can use an icon font library for the icons.
 
 There is a `style-guide.md` file, which contains the information you'll need, such as color palette and fonts.
 
