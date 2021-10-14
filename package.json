@@ -6,8 +6,6 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "@types/react": "^17.0.29",
-    "@types/react-dom": "^17.0.9",
     "axios": "^0.23.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -44,8 +42,8 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1",
-    "tsdocstandard": "^16.2.2",
-    "typescript": "3.8.x"
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "prettier": "^2.4.1"
   }
 }
