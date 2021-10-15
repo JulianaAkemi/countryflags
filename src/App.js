@@ -1,14 +1,18 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import { GlobalStyle } from './components/styles/GlobalStyles';
+import { GlobalStyle } from './components/Theme/GlobalStyle';
+import GlobalMargin from './components/GlobalMargin/GlobalMargin';
+import Theme from './components/Theme/Theme';
 
 function App() {
   return (
-    <>
+    <Theme>
       <GlobalStyle />
-      <Navbar />
-      Hello
-    </>
+      <GlobalMargin>
+        <Navbar />
+        Hello
+      </GlobalMargin>
+    </Theme>
   );
 }
 
