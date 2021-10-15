@@ -1,21 +1,23 @@
 import styled from 'styled-components';
 
-export const GlobalPadding = styled.div`
-  padding: 0 16px;
+const GlobalMargin = styled.div`
+  margin: 0 16px;
 
   @media (min-width: 576px) {
-    padding: 0 10%;
+    margin: 0 57px;
   }
 
   @media (min-width: 768px) {
-    padding: 0 15%;
+    margin: 0 115px;
   }
 
   @media (min-width: 1200px) {
-    padding: 0 176px;
+    margin: 0 176px;
   }
 
   @media (min-width: 1400px) {
-    padding: 0 15%;
+    margin: 0 210px;
   }
 `;
+
+export default GlobalMargin;
