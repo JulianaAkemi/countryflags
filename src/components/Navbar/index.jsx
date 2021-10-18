@@ -8,20 +8,8 @@ const StyledNav = styled.nav`
   background: ${({ theme }) => theme.lightTheme.lightElements};
   margin: 0 -16px;
 
-  @media (min-width: 576px) {
-    margin: 0 -57px;
-  }
-
-  @media (min-width: 768px) {
-    margin: 0 -115px;
-  }
-
-  @media (min-width: 1200px) {
+  @media (min-width: 1366px) {
     margin: 0 -176px;
-  }
-
-  @media (min-width: 1400px) {
-    margin: 0 -210px;
   }
 `;
 
@@ -31,30 +19,10 @@ const Title = styled.h1`
   font-size: 16px;
   margin: 0 16px;
 
-  @media (min-width: 576px) {
-    margin: 0 57px;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 18px;
-    margin: 0 115px;
-  }
-
-  @media (min-width: 992px) {
-    font-size: 20px;
-    font-weight: 800;
-  }
-
-  @media (min-width: 1200px) {
+  @media (min-width: 1366px) {
     font-size: 24px;
     font-weight: 800;
     margin: 0 176px;
-  }
-
-  @media (min-width: 1400px) {
-    font-size: 30px;
-    font-weight: 800;
-    margin: 0 210px;
   }
 `;
 
