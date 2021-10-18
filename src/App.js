@@ -1,17 +1,18 @@
 import React from 'react';
+import AlignedWrapper from './components/AlignedWrapper';
+import Container from './components/Container';
 import Navbar from './components/Navbar';
 import { GlobalStyle } from './components/Theme/GlobalStyle';
-import GlobalMargin from './components/GlobalMargin/GlobalMargin';
 import Theme from './components/Theme/Theme';
 
 function App() {
   return (
     <Theme>
       <GlobalStyle />
-      <GlobalMargin>
-        <Navbar />
-        Hello
-      </GlobalMargin>
+      <Navbar />
+      <AlignedWrapper>
+        <Container>Hello</Container>
+      </AlignedWrapper>
     </Theme>
   );
 }

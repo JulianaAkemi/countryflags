@@ -6,23 +6,21 @@ const StyledNav = styled.nav`
   align-items: center;
   height: 80px;
   background: ${({ theme }) => theme.lightTheme.lightElements};
-  margin: 0 -16px;
-
-  @media (min-width: 1366px) {
-    margin: 0 -176px;
-  }
 `;
 
 const Title = styled.h1`
   color: ${({ theme }) => theme.lightTheme.darkText};
   font-weight: 900;
   font-size: 16px;
-  margin: 0 16px;
+  display: block;
+  max-width: 343px;
+  width: 100%;
+  margin: 0 auto;
 
-  @media (min-width: 1366px) {
+  @media (min-width: 1024px) {
     font-size: 24px;
     font-weight: 800;
-    margin: 0 176px;
+    max-width: 1014px;
   }
 `;
 
