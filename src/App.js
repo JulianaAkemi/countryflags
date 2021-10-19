@@ -3,17 +3,18 @@ import AlignedWrapper from './components/AlignedWrapper';
 import Container from './components/Container';
 import Navbar from './components/Navbar';
 import { GlobalStyle } from './components/Theme/GlobalStyle';
-import Theme from './components/Theme/Theme';
+import { ThemeProvider } from 'styled-components';
+import theme from './components/Theme/Theme';
 
 function App() {
   return (
-    <Theme>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Navbar />
       <AlignedWrapper>
         <Container>Hello</Container>
       </AlignedWrapper>
-    </Theme>
+    </ThemeProvider>
   );
 }
 

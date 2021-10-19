@@ -1,17 +1,18 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
-
 const theme = {
-  lightTheme: {
-    darkText: '#4A4A4A',
-    inputDarkText: '#858585',
-    lightBg: '#fafafa',
-    lightElements: '#ffffff',
+  colors: {
+    text: '#4A4A4A',
+    inputText: '#858585',
+    bg: '#fafafa',
+    elements: '#ffffff',
   },
+  fonts: 'Nunito Sans, sans-serif',
+  fontSizes: {
+    sm: '12px',
+    md: '16px',
+    lg: '24px',
+    xlg: '32px',
+  },
+  breakpoints: { mobile: '375px', desktop: '1024px' },
 };
 
-const Theme = (props) => {
-  return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
-};
-
-export default Theme;
+export default theme;
