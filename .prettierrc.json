@@ -1,4 +1,7 @@
 {
   "singleQuote": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "options": {
+    "prettier/prettier": ["error", { "singleQuote": true, "parser": "flow" }]
+  }
 }

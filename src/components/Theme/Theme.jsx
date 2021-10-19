@@ -4,6 +4,7 @@ const theme = {
     inputText: '#858585',
     bg: '#fafafa',
     elements: '#ffffff',
+    outline: '#ededed',
   },
   fonts: 'Nunito Sans, sans-serif',
   fontSizes: {
