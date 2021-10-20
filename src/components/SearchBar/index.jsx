@@ -1,30 +1,19 @@
 import styled from 'styled-components';
 import { GrSearch } from 'react-icons/gr';
+import { FormField } from '../Theme/Theme';
 
 const SearchBar = () => {
   return (
     <Search>
       <Icon as={GrSearch} />
-      <input type="text" placeholder="Search for a country…" />
+      <input type='text' placeholder='Search for a country…' />
     </Search>
   );
 };
 
-const Search = styled.div(
-  ({ theme }) => `
-    width: 100%;
-    height: 48px;
-    padding: 12px 16px;
-    border: 1px solid ${theme.colors.outline};
-    background-color: ${theme.colors.elements};
-    display: flex;
-    align-items: center;
-
-    input {
-      color: ${theme.colors.inputText};
-    }
-`,
-);
+const Search = styled(FormField)`
+  padding: 12px 16px;
+`;
 
 const Icon = styled.svg`
   margin-right: 16px;
