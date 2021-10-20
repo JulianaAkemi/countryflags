@@ -12,10 +12,10 @@ const SearchBar = () => {
 
 const Search = styled.div(
   ({ theme }) => `
-    width: 343px;
+    width: 100%;
     height: 48px;
     margin-top: 40px;
-    padding: 13px 15px;
+    padding: 12px 16px;
     border: 1px solid ${theme.colors.outline};
     background-color: ${theme.colors.elements};
     display: flex;
@@ -23,10 +23,6 @@ const Search = styled.div(
 
     input {
       color: ${theme.colors.inputText};
-    }
-
-    @media (min-width: ${theme.breakpoints.desktop}) {
-      width: 327px;
     }
 `,
 );
