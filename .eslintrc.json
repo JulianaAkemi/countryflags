@@ -6,7 +6,7 @@
   "rules": {
     "quotes": [2, "single"],
     "no-trailing-spaces": [2],
-    "jsx-quotes": ["error", "prefer-single"],
+    "jsx-quotes": ["warn", "prefer-single"],
     "react/jsx-boolean-value": [0],
     "react-hooks/rules-of-hooks": "error",
     "prettier/prettier": 2,

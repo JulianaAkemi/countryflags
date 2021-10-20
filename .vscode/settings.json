@@ -4,5 +4,10 @@
   },
   "editor.formatOnSave": true, // Tell VSCode to format files on save
   "editor.defaultFormatter": "esbenp.prettier-vscode", // Tell VSCode to use Prettier as default file formatter
-  "eslint.workingDirectories": ["src"]
+  "eslint.workingDirectories": ["src"],
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "markdown.preview.typographer": true
 }

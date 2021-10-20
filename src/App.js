@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <GlobalStyle />
       <Navbar />
       <AlignedWrapper>
-        <Container>Hello</Container>
+        <Container>
+          <SearchBar />
+        </Container>
       </AlignedWrapper>
     </ThemeProvider>
   );

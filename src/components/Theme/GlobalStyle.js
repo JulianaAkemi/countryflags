@@ -6,6 +6,25 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${({ theme }) => theme.fonts};
     margin: 0;
     padding: 0;
+    vertical-align: baseline;
     text-decoration: none;
+  }
+
+  body {
+    background-color: ${({ theme }) => theme.colors.bg}
+  }
+
+  input {
+    outline: none;
+    border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;  
+  }
+
+  input:focus {
+    outline: none;
   }
 `;
