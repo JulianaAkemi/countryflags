@@ -3,24 +3,24 @@ import { GrDown } from 'react-icons/gr';
 import { useState } from 'react';
 import { FormField } from '../Theme/Theme';
 
-const Filter = () => {
+const Filter = ({ prompt }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Select>
       <Control onClick={() => setOpen((prev) => !prev)}>
-        <p>Filter by Region</p>
+        <p>{prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>
-      {open && (
-        <Options>
-          <p>Africa</p>
-          <p>America</p>
-          <p>Asia</p>
-          <p>Europe</p>
-          <p>Oceania</p>
-        </Options>
-      )}
+      <Options className={`${open ? 'options-open' : null}`}>
+        <ul>
+          <li>TEST</li>
+          <li>TEST</li>
+          <li>TEST</li>
+          <li>TEST</li>
+          <li>TEST</li>
+        </ul>
+      </Options>
     </Select>
   );
 };
@@ -36,6 +36,27 @@ const Select = styled.div`
     transition: 0.3s all ease;
     transform: rotateZ(-180deg);
   }
+  .options-open {
+    display: inherit;
+    transform-origin: top center;
+    animation: scaleY 300ms ease-in-out forwards;
+
+    @keyframes scaleY {
+      0% {
+        opacity: 0;
+        transform: scaleY(0);
+      }
+
+      50% {
+        transform: scaleY(0.5);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
+  }
 `;
 
 const Control = styled(FormField)(
@@ -49,19 +70,20 @@ const Control = styled(FormField)(
 
 const Options = styled.div(
   ({ theme }) => `
-  
+    display: none;
     width: 100%;
     border: 1px solid ${theme.colors.outline};
     background-color: ${theme.colors.elements};
     color: ${theme.colors.inputText};
     font-size:  ${theme.fontSizes.md};
     font-weight: 400;
+    transform: scale(0);
 
-    p {
+    li {
       padding: 6px 0 6px 24px;
     }
 
-    p:hover {
+    li:hover {
       background: ${theme.colors.inputText};
       color: ${theme.colors.elements};
     }  

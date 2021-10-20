@@ -16,7 +16,7 @@ function App() {
       <AlignedWrapper>
         <Container>
           <SearchBar />
-          <Filter />
+          <Filter prompt='Filter by Region' />
         </Container>
       </AlignedWrapper>
     </ThemeProvider>
