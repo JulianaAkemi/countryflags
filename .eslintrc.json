@@ -6,10 +6,16 @@
   "rules": {
     "quotes": [2, "single"],
     "no-trailing-spaces": [2],
-    "jsx-quotes": ["warn", "prefer-single"],
+    "jsx-quotes": [2, "prefer-single"],
     "react/jsx-boolean-value": [0],
     "react-hooks/rules-of-hooks": "error",
-    "prettier/prettier": 2,
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true,
+        "semi": true
+      }
+    ],
     "space-before-function-paren": 0,
     "linebreak-style": 0
   }

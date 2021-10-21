@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.bg}
   }
 
-  input {
+  input, select, option {
     outline: none;
     border:none;
     background-image:none;
@@ -26,5 +26,11 @@ export const GlobalStyle = createGlobalStyle`
 
   input:focus {
     outline: none;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 `;

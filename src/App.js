@@ -6,6 +6,7 @@ import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
 import SearchBar from './components/SearchBar';
+import Filter from './components/Filter';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <AlignedWrapper>
         <Container>
           <SearchBar />
+          <Filter prompt='Filter by Region' />
         </Container>
       </AlignedWrapper>
     </ThemeProvider>
