@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
 import SearchBar from './components/SearchBar';
 import Filter from './components/Filter';
+import Card from './components/Card';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Container>
           <SearchBar />
           <Filter prompt='Filter by Region' />
+          <Card />
         </Container>
       </AlignedWrapper>
     </ThemeProvider>
