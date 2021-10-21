@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { GrSearch } from 'react-icons/gr';
-import { FormField } from '../Theme/Theme';
+import { FormField } from '../FormField';
 
 const SearchBar = () => {
   return (

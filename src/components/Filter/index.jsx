@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GrDown } from 'react-icons/gr';
 import { useState } from 'react';
-import { FormField } from '../Theme/Theme';
+import { FormField } from '../FormField';
 
 const Filter = ({ prompt }) => {
   const [open, setOpen] = useState(false);
