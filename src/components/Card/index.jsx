@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 
 const Card = ({ data }) => {
-  if (!!data?.length) return <></>;
+  if (!data?.length) return <></>;
 
   return (
     <div>
