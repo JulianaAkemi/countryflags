@@ -20,6 +20,8 @@ function App() {
           <Filter prompt='Filter by Region' />
           <Card />
         </Container>
+
+        <CardDetails />
       </AlignedWrapper>
     </ThemeProvider>
   );
