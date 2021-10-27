@@ -4,8 +4,7 @@ import noImage from '../../assets/no-image-available.png';
 import AlignedWrapper from '../AlignedWrapper';
 import Container from '../Container';
 
-const CardDetails = ({ data }) => {
-  const item = data[1];
+const CardDetails = ({ item }) => {
   const links = item[Object.keys(item)[6]].split(',');
 
   if (!data?.length) return <></>;
