@@ -62,7 +62,7 @@ const CardDetails = ({ item, sectionName }) => {
               <LinkList>
                 <h3>{sectionName}:</h3>
 
-                {!links?.length ? (
+                {!links[0] == '' ? (
                   links.map((item) => <a key={item}>{item}</a>)
                 ) : (
                   <p>There are no {sectionName}</p>
