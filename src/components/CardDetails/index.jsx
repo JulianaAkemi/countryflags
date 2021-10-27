@@ -4,10 +4,10 @@ import noImage from '../../assets/no-image-available.png';
 import AlignedWrapper from '../AlignedWrapper';
 import Container from '../Container';
 
-const CardDetails = ({ item }) => {
+const CardDetails = ({ item, sectionName }) => {
   const links = item[Object.keys(item)[6]].split(',');
 
-  if (!data?.length) return <></>;
+  if (!!item?.length) return <></>;
 
   return (
     <DetailsSection>
@@ -60,12 +60,12 @@ const CardDetails = ({ item }) => {
               </div>
 
               <LinkList>
-                <h3>Border Countries:</h3>
+                <h3>{sectionName}:</h3>
 
-                {!!links?.length ? (
+                {!links?.length ? (
                   links.map((item) => <a key={item}>{item}</a>)
                 ) : (
-                  <p>There are no border countries</p>
+                  <p>There are no {sectionName}</p>
                 )}
               </LinkList>
             </div>
@@ -158,6 +158,14 @@ const LinkList = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-top: 64px;
+  }
+
+  p {
+    text-transform: lowercase;
+
+    :first-letter {
+      text-transform: capitalize;
+    }
   }
 
   h3 {

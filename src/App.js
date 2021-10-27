@@ -8,6 +8,7 @@ import theme from './components/Theme/Theme';
 import SearchBar from './components/SearchBar';
 import Filter from './components/Filter';
 import Card from './components/Card';
+import CardDetails from './components/CardDetails';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         </Container>
       </AlignedWrapper>
 
-      <CardDetails />
+      <CardDetails sectionName='Border Countries' />
     </ThemeProvider>
   );
 }
