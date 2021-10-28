@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 import AlignedWrapper from '../AlignedWrapper';
 import Container from '../Container';
+import { cardDetailsExample as item } from '../../testAPI';
 
-const CardDetails = ({ item, sectionName }) => {
+const CardDetails = ({ sectionName }) => {
+  if (Object.keys(item).length === 0) return <></>;
+
   const links = item[Object.keys(item)[6]].split(',');
-
-  if (!!item?.length) return <></>;
 
   return (
     <DetailsSection>
@@ -65,7 +66,7 @@ const CardDetails = ({ item, sectionName }) => {
                 {!links[0] == '' ? (
                   links.map((item) => <a key={item}>{item}</a>)
                 ) : (
-                  <p>There are no {sectionName}</p>
+                  <p>There are no {sectionName}.</p>
                 )}
               </LinkList>
             </div>
@@ -163,7 +164,7 @@ const LinkList = styled.div`
   p {
     text-transform: lowercase;
 
-    :first-letter {
+    &:first-letter {
       text-transform: capitalize;
     }
   }

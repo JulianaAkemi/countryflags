@@ -23,4 +23,6 @@ const testAPI = [
   },
 ];
 
+export const cardDetailsExample = testAPI[1];
+
 export default testAPI;
