@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <AlignedWrapper>
         <Container>
-          <CardDetails sectionName='Border Countries' />
+          <CardDetails />
         </Container>
       </AlignedWrapper>
     </ThemeProvider>

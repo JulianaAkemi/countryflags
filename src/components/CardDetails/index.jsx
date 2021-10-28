@@ -5,7 +5,7 @@ import AlignedWrapper from '../AlignedWrapper';
 import Container from '../Container';
 import { cardDetailsExample as item } from '../../testAPI';
 
-const CardDetails = ({ sectionName }) => {
+const CardDetails = () => {
   if (Object.keys(item).length === 0) return <></>;
 
   const links = item[Object.keys(item)[6]].split(',');
@@ -61,12 +61,12 @@ const CardDetails = ({ sectionName }) => {
               </div>
 
               <LinkList>
-                <h3>{sectionName}:</h3>
+                <h3>Border Countries:</h3>
 
                 {!links[0] == '' ? (
                   links.map((item) => <a key={item}>{item}</a>)
                 ) : (
-                  <p>There are no {sectionName}.</p>
+                  <p>There are no border countries.</p>
                 )}
               </LinkList>
             </div>
