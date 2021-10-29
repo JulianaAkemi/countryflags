@@ -2,37 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 
-const Card = ({ data }) => {
-  if (!data?.length) return <></>;
+const Card = ({ item }) => {
+  if (!!item?.length) return <></>;
 
   return (
     <div>
-      {data.map((item) => (
-        <div>
-          <CardImage>
-            {item[Object.keys(item)[0]] ? (
-              <img src={item[Object.keys(item)[0]]} />
-            ) : (
-              <img src={noImage} />
-            )}
-          </CardImage>
-          <CardInfo>
-            <h2>{item[Object.keys(item)[1]]}</h2>
-            <p>
-              <strong>{[Object.keys(item)[2]]}:</strong>{' '}
-              {item[Object.keys(item)[2]]}
-            </p>
-            <p>
-              <strong>{[Object.keys(item)[3]]}:</strong>{' '}
-              {item[Object.keys(item)[3]]}
-            </p>
-            <p>
-              <strong>{[Object.keys(item)[4]]}:</strong>{' '}
-              {item[Object.keys(item)[4]]}
-            </p>
-          </CardInfo>
-        </div>
-      ))}
+      <CardImage>
+        {item[Object.keys(item)[0]] ? (
+          <img src={item[Object.keys(item)[0]]} />
+        ) : (
+          <img src={noImage} />
+        )}
+      </CardImage>
+      <CardInfo>
+        <h2>{item[Object.keys(item)[1]]}</h2>
+        <p>
+          <strong>{[Object.keys(item)[7]]}:</strong>{' '}
+          {item[Object.keys(item)[7]]}
+        </p>
+        <p>
+          <strong>{[Object.keys(item)[2]]}:</strong>{' '}
+          {item[Object.keys(item)[2]]}
+        </p>
+        <p>
+          <strong>{[Object.keys(item)[1]]}:</strong>{' '}
+          {item[Object.keys(item)[1]]}
+        </p>
+      </CardInfo>
     </div>
   );
 };
@@ -55,14 +51,16 @@ const CardInfo = styled.div`
   h2 {
     font-size: ${({ theme }) => theme.fontSizes.md};
     font-weight: 800;
-    text-transform: capitalize;
     margin-bottom: 5px;
+  }
+
+  strong {
+    text-transform: capitalize;
   }
 
   p {
     font-size: ${({ theme }) => theme.fontSizes.sm};
     font-weight: 400;
-    text-transform: capitalize;
     margin-top: 15px;
   }
 `;
