@@ -57,6 +57,7 @@ const CardInfo = styled.div`
     font-weight: 800;
     text-transform: capitalize;
     margin-bottom: 5px;
+    margin-right: 40px;
   }
 
   p {

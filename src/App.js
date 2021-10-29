@@ -5,9 +5,7 @@ import Navbar from './components/Navbar';
 import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
-import SearchBar from './components/SearchBar';
-import Filter from './components/Filter';
-import Card from './components/Card';
+import CardDetails from './components/CardDetails';
 
 function App() {
   return (
@@ -16,9 +14,7 @@ function App() {
       <Navbar />
       <AlignedWrapper>
         <Container>
-          <SearchBar />
-          <Filter prompt='Filter by Region' />
-          <Card />
+          <CardDetails />
         </Container>
       </AlignedWrapper>
     </ThemeProvider>
