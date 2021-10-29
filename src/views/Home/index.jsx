@@ -55,6 +55,11 @@ const PageTop = styled.div`
 const CardsGrid = styled.div`
   .card {
     margin-bottom: 16px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
     @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
       margin-bottom: 0px;
 

@@ -3,17 +3,10 @@ import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 
 const Card = ({ item }) => {
-<<<<<<< HEAD
   if (!item || Object.keys(item).length === 0) return <></>;
 
   return (
     <div>
-=======
-  if (Object.keys(item).length === 0) return <></>;
-
-  return (
-    <div className='card'>
->>>>>>> aa6af6d (feature(HomeStructure): added structure for homepage)
       <CardImage>
         {item[Object.keys(item)[0]] ? (
           <img src={item[Object.keys(item)[0]]} />
@@ -24,28 +17,16 @@ const Card = ({ item }) => {
       <CardInfo>
         <h2>{item[Object.keys(item)[1]]}</h2>
         <p>
-<<<<<<< HEAD
           <strong>{[Object.keys(item)[7]]}:</strong>{' '}
           {item[Object.keys(item)[7]]}
         </p>
         <p>
-=======
->>>>>>> aa6af6d (feature(HomeStructure): added structure for homepage)
           <strong>{[Object.keys(item)[2]]}:</strong>{' '}
           {item[Object.keys(item)[2]]}
         </p>
         <p>
-<<<<<<< HEAD
           <strong>{[Object.keys(item)[1]]}:</strong>{' '}
           {item[Object.keys(item)[1]]}
-=======
-          <strong>{[Object.keys(item)[3]]}:</strong>{' '}
-          {item[Object.keys(item)[3]]}
-        </p>
-        <p>
-          <strong>{[Object.keys(item)[4]]}:</strong>{' '}
-          {item[Object.keys(item)[4]]}
->>>>>>> aa6af6d (feature(HomeStructure): added structure for homepage)
         </p>
       </CardInfo>
     </div>
