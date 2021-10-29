@@ -6,6 +6,8 @@ import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
 import CardDetails from './components/CardDetails';
+import testAPI from './testAPI';
+import Home from './views/Home';
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
       <Navbar />
       <AlignedWrapper>
         <Container>
-          <CardDetails />
+          <Home data={testAPI} />
         </Container>
       </AlignedWrapper>
     </ThemeProvider>
