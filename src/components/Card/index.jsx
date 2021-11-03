@@ -7,7 +7,7 @@ const Card = ({ item }) => {
 
   return (
     <div>
-      <CardImage>
+      <CardImage className='card'>
         {item[Object.keys(item)[0]] ? (
           <img src={item[Object.keys(item)[0]]} />
         ) : (

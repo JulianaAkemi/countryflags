@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import Card from '../../components/Card';
 import Filter from '../../components/Filter';
 import SearchBar from '../../components/SearchBar';
+import testAPI from '../../testAPI';
 
-const Home = ({ data }) => {
+const Home = () => {
+  const data = testAPI;
   if (!data?.length) return <></>;
   return (
     <Page>
