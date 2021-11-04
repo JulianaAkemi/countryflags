@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../../components/Card';
 import Filter from '../../components/Filter';
 import SearchBar from '../../components/SearchBar';
-import testAPI from '../../testAPI';
+import { fetchCountries } from '../../services/countries';
+import { normalizeCountriesCard } from '../../utils/countriesCard';
 
 const Home = () => {
-  const data = testAPI;
-  if (!data?.length) return <></>;
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    const handleFetchCountries = async () => {
+      try {
+        const response = await fetchCountries();
+        const normalizedData = normalizeCountriesCard(response.data);
+        setCountries(normalizedData);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    handleFetchCountries();
+  }, []);
+
+  if (!countries?.length) return <></>;
+
   return (
     <Page>
       <PageTop>
@@ -19,8 +35,8 @@ const Home = () => {
         </div>
       </PageTop>
       <CardsGrid>
-        {data.map((item) => (
-          <Card item={item} key={item.name} />
+        {countries.map((item) => (
+          <Card item={item} key={item.id} className='card' />
         ))}
       </CardsGrid>
     </Page>
@@ -57,17 +73,8 @@ const PageTop = styled.div`
 const CardsGrid = styled.div`
   .card {
     margin-bottom: 16px;
-
-    &:hover {
-      cursor: pointer;
-    }
-
     @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
       margin-bottom: 0px;
-
-      img {
-        height: 161px;
-      }
     }
   }
 
