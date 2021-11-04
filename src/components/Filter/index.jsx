@@ -30,7 +30,7 @@ const Select = styled.div`
   position: relative;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: ${(selectWidth) => (selectWidth ? selectWidth : '100%')};
+    width: 100%;
   }
 
   &:hover {
