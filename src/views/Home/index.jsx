@@ -8,12 +8,15 @@ import { normalizeCountriesCard } from '../../utils/countriesCard';
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     const handleFetchCountries = async () => {
       try {
         const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(response.data);
+        const normalizedData = normalizeCountriesCard(
+          response.data.slice(0, 8),
+        );
         setCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
@@ -22,13 +25,33 @@ const Home = () => {
     handleFetchCountries();
   }, []);
 
+  useEffect(() => {
+    const handleSearchCountries = async () => {
+      try {
+        const response = await fetchCountries();
+        const normalizedData = normalizeCountriesCard(response.data);
+        const newFilter = normalizedData.filter((value) => {
+          return value.title.toLowerCase().includes(query.toLowerCase());
+        });
+        setCountries(newFilter);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    handleSearchCountries();
+  }, [query]);
+
   if (!countries?.length) return <></>;
 
   return (
     <Page>
       <PageTop>
         <div className='search'>
-          <SearchBar />
+          <SearchBar
+            prompt='Search for a country…'
+            data={countries}
+            getQuery={(q) => setQuery(q)}
+          />
         </div>
         <div className='filter'>
           <Filter prompt='Filter by Region' />
