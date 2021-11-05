@@ -14,9 +14,7 @@ const Home = () => {
     const handleFetchCountries = async () => {
       try {
         const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(
-          response.data.slice(0, 8),
-        );
+        const normalizedData = normalizeCountriesCard(response.data);
         setCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
