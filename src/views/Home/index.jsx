@@ -9,11 +9,6 @@ import { normalizeCountriesCard } from '../../utils/countriesCard';
 const Home = () => {
   const [countries, setCountries] = useState([]);
   const [query, setQuery] = useState('');
-  const options = Array.from(
-    new Set(countries.map((option) => option.info[1].region)),
-  );
-
-  console.log(options);
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -59,7 +54,7 @@ const Home = () => {
           />
         </div>
         <div className='filter'>
-          <Filter prompt='Filter by Region' options={options} />
+          <Filter prompt='Filter by Region' />
         </div>
       </PageTop>
       <CardsGrid>
