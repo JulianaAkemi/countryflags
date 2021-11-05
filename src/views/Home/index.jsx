@@ -7,7 +7,7 @@ import { fetchCountries } from '../../services/countries';
 import { normalizeCountriesCard } from '../../utils/countriesCard';
 
 const Home = () => {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(null);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Home = () => {
         const newFilter = normalizedData.filter((value) => {
           return value.title.toLowerCase().includes(query.toLowerCase());
         });
-        if (newFilter != 0) setCountries(newFilter);
+        setCountries(newFilter);
       } catch (error) {
         console.error(error.message);
       }
@@ -41,7 +41,7 @@ const Home = () => {
     handleSearchCountries();
   }, [query]);
 
-  if (!countries?.length) return <></>;
+  if (!countries) return <></>;
 
   return (
     <Page>
@@ -58,9 +58,13 @@ const Home = () => {
         </div>
       </PageTop>
       <CardsGrid>
-        {countries.map((item) => (
-          <Card item={item} key={item.id} className='card' />
-        ))}
+        {!!countries?.length ? (
+          countries.map((item) => (
+            <Card item={item} key={item.id} className='card' />
+          ))
+        ) : (
+          <div>No matches</div>
+        )}
       </CardsGrid>
     </Page>
   );
