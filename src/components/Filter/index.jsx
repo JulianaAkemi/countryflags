@@ -3,7 +3,7 @@ import { GrDown } from 'react-icons/gr';
 import { useState } from 'react';
 import { FormField } from '../FormField';
 
-const Filter = ({ prompt, selectWidth }) => {
+const Filter = ({ prompt, options }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -14,11 +14,9 @@ const Filter = ({ prompt, selectWidth }) => {
       </Control>
       <Options className={`${open ? 'options-open' : null}`}>
         <ul>
-          <li>TEST</li>
-          <li>TEST</li>
-          <li>TEST</li>
-          <li>TEST</li>
-          <li>TEST</li>
+          {options.map((option) => (
+            <li key={option}>{option}</li>
+          ))}
         </ul>
       </Options>
     </Select>
