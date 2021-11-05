@@ -3,7 +3,7 @@ import { GrSearch } from 'react-icons/gr';
 import { FormField } from '../FormField';
 import { useState } from 'react';
 
-const SearchBar = ({ propmt, data, getQuery }) => {
+const SearchBar = ({ prompt, data, getQuery }) => {
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFilter = (e) => {
@@ -28,7 +28,7 @@ const SearchBar = ({ propmt, data, getQuery }) => {
         <Icon as={GrSearch} />
         <input
           type='text'
-          placeholder={propmt}
+          placeholder={prompt}
           onChange={(handleFilter, (e) => onChange(e.target.value))}
         />
       </Search>
