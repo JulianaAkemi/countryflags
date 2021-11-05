@@ -38,7 +38,7 @@ const Home = () => {
         const newFilter = normalizedData.filter((value) => {
           return value.title.toLowerCase().includes(query.toLowerCase());
         });
-        setCountries(newFilter);
+        if (newFilter != 0) setCountries(newFilter);
       } catch (error) {
         console.error(error.message);
       }
