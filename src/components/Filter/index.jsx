@@ -3,24 +3,33 @@ import { GrDown } from 'react-icons/gr';
 import { useState } from 'react';
 import { FormField } from '../FormField';
 
-const Filter = ({ prompt, options }) => {
+const Filter = ({ prompt, options, optionValue, onChange }) => {
   const [open, setOpen] = useState(false);
 
-  const onClick = (filter) => {
-    getFilter(filter);
-    console.log(filter);
+  const onClick = (selectedFilter) => {
+    getFilter(selectedFilter);
+    console.log(selectedFilter);
   };
 
   return (
     <Select>
       <Control onClick={() => setOpen((prev) => !prev)}>
-        <p>{prompt}</p>
+        <p>{optionValue ? optionValue : prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>
       <Options className={`${open ? 'options-open' : null}`}>
         <ul>
           {options.map((option) => (
-            <li key={option} onClick={(e) => console.log(e.target.innerText)}>
+            <li
+              key={option}
+              className={`${optionValue === option ? 'selected' : null}`}
+              onClick={
+                // ((e) => console.log(e.target.innerText),
+                () => {
+                  onChange(option), setOpen(false);
+                }
+              }
+            >
               {option}
             </li>
           ))}
@@ -93,12 +102,16 @@ const Options = styled.div(
 
     li {
       padding: 6px 0 6px 24px;
+
+      &:hover {
+        background: ${theme.colors.inputText};
+        color: ${theme.colors.elements};
+      }
     }
 
-    li:hover {
-      background: ${theme.colors.inputText};
-      color: ${theme.colors.elements};
-    }  
+    .selected {
+      background: ${theme.colors.outline};
+    }
 `,
 );
 

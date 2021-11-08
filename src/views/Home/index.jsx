@@ -11,9 +11,9 @@ const Home = () => {
   const [query, setQuery] = useState('');
   const options = Array.from(
     new Set(countries.map((option) => option.info[1].region)),
-  );
+  ); //Array of objects of unique values
   const [filter, setFilter] = useState('');
-
+  const [optionValue, setOptionValue] = useState(null);
   console.log(options);
 
   useEffect(() => {
@@ -47,21 +47,21 @@ const Home = () => {
     handleSearchCountries();
   }, [query]);
 
-  useEffect(() => {
-    const handleFilterCountries = async () => {
-      try {
-        const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(response.data);
-        const newFilter = normalizedData.filter((value) => {
-          return value.title.toLowerCase().includes(query.toLowerCase());
-        });
-        if (newFilter != 0) setCountries(newFilter);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-    handleFilterCountries();
-  }, [filter]);
+  // useEffect(() => {
+  //   const handleFilterCountries = async () => {
+  //     try {
+  //       const response = await fetchCountries();
+  //       const normalizedData = normalizeCountriesCard(response.data);
+  //       const newFilter = normalizedData.filter((value) => {
+  //         return value.title.toLowerCase().includes(query.toLowerCase());
+  //       });
+  //       if (newFilter != 0) setCountries(newFilter);
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     }
+  //   };
+  //   handleFilterCountries();
+  // }, [filter]);
 
   if (!countries?.length) return <></>;
 
@@ -80,6 +80,8 @@ const Home = () => {
             prompt='Filter by Region'
             options={options}
             getFilter={(filter) => setFilter(filter)}
+            optionValue={optionValue}
+            onChange={(option) => setOptionValue(option)}
           />
         </div>
       </PageTop>
