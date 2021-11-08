@@ -6,6 +6,11 @@ import { FormField } from '../FormField';
 const Filter = ({ prompt, options }) => {
   const [open, setOpen] = useState(false);
 
+  const onClick = (filter) => {
+    getFilter(filter);
+    console.log(filter);
+  };
+
   return (
     <Select>
       <Control onClick={() => setOpen((prev) => !prev)}>
@@ -15,7 +20,9 @@ const Filter = ({ prompt, options }) => {
       <Options className={`${open ? 'options-open' : null}`}>
         <ul>
           {options.map((option) => (
-            <li key={option}>{option}</li>
+            <li key={option} onClick={(e) => console.log(e.target.innerText)}>
+              {option}
+            </li>
           ))}
         </ul>
       </Options>

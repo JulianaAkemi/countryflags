@@ -12,6 +12,7 @@ const Home = () => {
   const options = Array.from(
     new Set(countries.map((option) => option.info[1].region)),
   );
+  const [filter, setFilter] = useState('');
 
   console.log(options);
 
@@ -46,6 +47,22 @@ const Home = () => {
     handleSearchCountries();
   }, [query]);
 
+  useEffect(() => {
+    const handleFilterCountries = async () => {
+      try {
+        const response = await fetchCountries();
+        const normalizedData = normalizeCountriesCard(response.data);
+        const newFilter = normalizedData.filter((value) => {
+          return value.title.toLowerCase().includes(query.toLowerCase());
+        });
+        if (newFilter != 0) setCountries(newFilter);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    handleFilterCountries();
+  }, [filter]);
+
   if (!countries?.length) return <></>;
 
   return (
@@ -59,7 +76,11 @@ const Home = () => {
           />
         </div>
         <div className='filter'>
-          <Filter prompt='Filter by Region' options={options} />
+          <Filter
+            prompt='Filter by Region'
+            options={options}
+            getFilter={(filter) => setFilter(filter)}
+          />
         </div>
       </PageTop>
       <CardsGrid>
