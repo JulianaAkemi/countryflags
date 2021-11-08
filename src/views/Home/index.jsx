@@ -37,7 +37,7 @@ const Home = () => {
         const newFilter = normalizedData.filter((value) => {
           return value.title.toLowerCase().includes(query.toLowerCase());
         });
-        if (newFilter.length != 0) setCountries(newFilter);
+        setCountries(newFilter);
       } catch (error) {
         console.error(error.message);
       }
@@ -84,9 +84,13 @@ const Home = () => {
         </div>
       </PageTop>
       <CardsGrid>
-        {countries.map((item) => (
-          <Card item={item} key={item.id} className='card' />
-        ))}
+        {!!countries?.length ? (
+          countries.map((item) => (
+            <Card item={item} key={item.id} className='card' />
+          ))
+        ) : (
+          <div>No matches</div>
+        )}
       </CardsGrid>
     </Page>
   );

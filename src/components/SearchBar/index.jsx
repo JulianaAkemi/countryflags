@@ -11,11 +11,7 @@ const SearchBar = ({ prompt, data, getQuery }) => {
     const newFilter = data.filter((value) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase());
     });
-    if (searchWord === '') {
-      setFilteredData([]);
-    } else {
-      setFilteredData(newFilter);
-    }
+    setFilteredData(newFilter);
   };
 
   const onChange = (q) => {
