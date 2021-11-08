@@ -14,15 +14,13 @@ const Home = () => {
   ); //Array of objects of unique values
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
-  console.log(options);
+  console.log('Home options loading', options);
 
   useEffect(() => {
     const handleFetchCountries = async () => {
       try {
         const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(
-          response.data.slice(0, 8),
-        );
+        const normalizedData = normalizeCountriesCard(response.data);
         setCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
@@ -39,7 +37,7 @@ const Home = () => {
         const newFilter = normalizedData.filter((value) => {
           return value.title.toLowerCase().includes(query.toLowerCase());
         });
-        if (newFilter != 0) setCountries(newFilter);
+        if (newFilter.length != 0) setCountries(newFilter);
       } catch (error) {
         console.error(error.message);
       }
@@ -47,21 +45,21 @@ const Home = () => {
     handleSearchCountries();
   }, [query]);
 
-  // useEffect(() => {
-  //   const handleFilterCountries = async () => {
-  //     try {
-  //       const response = await fetchCountries();
-  //       const normalizedData = normalizeCountriesCard(response.data);
-  //       const newFilter = normalizedData.filter((value) => {
-  //         return value.title.toLowerCase().includes(query.toLowerCase());
-  //       });
-  //       if (newFilter != 0) setCountries(newFilter);
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     }
-  //   };
-  //   handleFilterCountries();
-  // }, [filter]);
+  useEffect(() => {
+    const handleFilterCountries = async () => {
+      try {
+        const response = await fetchCountries();
+        const normalizedData = normalizeCountriesCard(response.data);
+        const newOption = normalizedData.filter((value) => {
+          return value.info[1].region.includes(filter);
+        });
+        if (newOption != 0) setCountries(newOption);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    handleFilterCountries();
+  }, [filter]);
 
   if (!countries?.length) return <></>;
 

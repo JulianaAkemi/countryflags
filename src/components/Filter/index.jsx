@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { GrDown } from 'react-icons/gr';
 import { FormField } from '../FormField';
 
-const Filter = ({ prompt, options, optionValue, onChange }) => {
+const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -11,9 +11,12 @@ const Filter = ({ prompt, options, optionValue, onChange }) => {
     setOpen(e && e.target === ref.current);
   };
 
-  const onClick = (selectedFilter) => {
-    getFilter(selectedFilter);
-    console.log(selectedFilter);
+  const handleSelection = (e) => {
+    onChange(e.target.innerText);
+    console.log('getting region text', e.target.innerText);
+    getFilter(e.target.innerText);
+    setOpen(false);
+    (e) => onSelection(e.target.innerText);
   };
 
   useEffect(() => {
@@ -23,7 +26,7 @@ const Filter = ({ prompt, options, optionValue, onChange }) => {
 
   return (
     <Select>
-      <Control ref={ref} onClick={() => setOpen((prev) => !prev)}>
+      <Control className='container' ref={ref} onClick={close}>
         <p>{optionValue ? optionValue : prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>
@@ -33,12 +36,7 @@ const Filter = ({ prompt, options, optionValue, onChange }) => {
             <li
               key={option}
               className={`${optionValue === option ? 'selected' : null}`}
-              onClick={
-                // ((e) => console.log(e.target.innerText),
-                () => {
-                  onChange(option), setOpen(false);
-                }
-              }
+              onClick={handleSelection}
             >
               {option}
             </li>
