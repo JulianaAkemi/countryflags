@@ -1,19 +1,29 @@
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { GrDown } from 'react-icons/gr';
-import { useState } from 'react';
 import { FormField } from '../FormField';
 
 const Filter = ({ prompt, options, optionValue, onChange }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  const close = (e) => {
+    setOpen(e && e.target === ref.current);
+  };
 
   const onClick = (selectedFilter) => {
     getFilter(selectedFilter);
     console.log(selectedFilter);
   };
 
+  useEffect(() => {
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, []);
+
   return (
     <Select>
-      <Control onClick={() => setOpen((prev) => !prev)}>
+      <Control ref={ref} onClick={() => setOpen((prev) => !prev)}>
         <p>{optionValue ? optionValue : prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>
