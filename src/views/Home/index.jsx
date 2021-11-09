@@ -9,6 +9,7 @@ import { normalizeCountriesCard } from '../../utils/countriesCard';
 const Home = () => {
   const [countries, setCountries] = useState(null);
   const [query, setQuery] = useState('');
+  const [filteredCountries, setFilteredCountries] = useState('');
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -16,6 +17,7 @@ const Home = () => {
         const response = await fetchCountries();
         const normalizedData = normalizeCountriesCard(response.data);
         setCountries(normalizedData);
+        setFilteredCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
       }
@@ -24,19 +26,12 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const handleSearchCountries = async () => {
-      try {
-        const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(response.data);
-        const newFilter = normalizedData.filter((value) => {
-          return value.title.toLowerCase().includes(query.toLowerCase());
-        });
-        setCountries(newFilter);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-    handleSearchCountries();
+    if (query) {
+      const filteredData = countries.filter((item) =>
+        item.title.toLowerCase().includes(query.toLowerCase()),
+      );
+      setFilteredCountries(filteredData);
+    }
   }, [query]);
 
   if (!countries) return <></>;
@@ -47,8 +42,7 @@ const Home = () => {
         <div className='search'>
           <SearchBar
             prompt='Search for a country…'
-            data={countries}
-            getQuery={(q) => setQuery(q)}
+            getQuery={(inputValue) => setQuery(inputValue)}
           />
         </div>
         <div className='filter'>
@@ -56,8 +50,8 @@ const Home = () => {
         </div>
       </PageTop>
       <CardsGrid>
-        {!!countries?.length ? (
-          countries.map((item) => (
+        {!!filteredCountries?.length ? (
+          filteredCountries.map((item) => (
             <Card item={item} key={item.id} className='card' />
           ))
         ) : (
