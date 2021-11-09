@@ -9,12 +9,16 @@ import { normalizeCountriesCard } from '../../utils/countriesCard';
 const Home = () => {
   const [countries, setCountries] = useState([]);
   const [query, setQuery] = useState('');
+<<<<<<< HEAD
   const options = Array.from(
     new Set(countries.map((option) => option.info[1].region)),
   ); //Array of objects of unique values
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
   console.log('Home options loading', options);
+=======
+  const [filteredCountries, setFilteredCountries] = useState('');
+>>>>>>> 2b8719aa585779fa84b9e11d46d717189848e539
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -22,6 +26,7 @@ const Home = () => {
         const response = await fetchCountries();
         const normalizedData = normalizeCountriesCard(response.data);
         setCountries(normalizedData);
+        setFilteredCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
       }
@@ -30,19 +35,12 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const handleSearchCountries = async () => {
-      try {
-        const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(response.data);
-        const newFilter = normalizedData.filter((value) => {
-          return value.title.toLowerCase().includes(query.toLowerCase());
-        });
-        setCountries(newFilter);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-    handleSearchCountries();
+    if (query) {
+      const filteredData = countries.filter((item) =>
+        item.title.toLowerCase().includes(query.toLowerCase()),
+      );
+      setFilteredCountries(filteredData);
+    }
   }, [query]);
 
   useEffect(() => {
@@ -69,8 +67,7 @@ const Home = () => {
         <div className='search'>
           <SearchBar
             prompt='Search for a country…'
-            data={countries}
-            getQuery={(q) => setQuery(q)}
+            getQuery={(inputValue) => setQuery(inputValue)}
           />
         </div>
         <div className='filter'>
@@ -84,8 +81,8 @@ const Home = () => {
         </div>
       </PageTop>
       <CardsGrid>
-        {!!countries?.length ? (
-          countries.map((item) => (
+        {!!filteredCountries?.length ? (
+          filteredCountries.map((item) => (
             <Card item={item} key={item.id} className='card' />
           ))
         ) : (
