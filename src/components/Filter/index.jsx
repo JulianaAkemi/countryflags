@@ -13,7 +13,6 @@ const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
 
   const handleSelection = (e) => {
     onChange(e.target.innerText);
-    console.log('getting region text', e.target.innerText);
     getFilter(e.target.innerText);
     setOpen(false);
     (e) => onSelection(e.target.innerText);
