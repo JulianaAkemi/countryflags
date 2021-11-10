@@ -106,7 +106,7 @@ const PageTop = styled.div`
       width: 327px;
     }
     .filter {
-      width: 242px;
+      width: 327px;
     }
   }
 `;

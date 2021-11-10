@@ -8,7 +8,23 @@ const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
   const ref = useRef(null);
 
   const close = (e) => {
-    setOpen(e && e.target === ref.current);
+    switch (e.target) {
+      case ref:
+        setOpen((prev) => !prev);
+        break;
+      case ref.current:
+        setOpen((prev) => !prev);
+        break;
+      case ref.current.children[0]:
+        setOpen((prev) => !prev);
+        break;
+      case ref.current.children[1]:
+        setOpen((prev) => !prev);
+        break;
+      default:
+        setOpen(false);
+        break;
+    }
   };
 
   const handleSelection = (e) => {
@@ -24,7 +40,7 @@ const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
 
   return (
     <Select>
-      <Control className='container' ref={ref} onClick={close}>
+      <Control className='container' ref={ref}>
         <p>{optionValue ? optionValue : prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>
