@@ -12,7 +12,7 @@ const Home = () => {
   const [searchedCountries, setSearchedCountries] = useState('');
   const options = Array.from(
     new Set(countries.map((option) => option.info[1].region)),
-  ); //Array of objects of unique values
+  );
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
   const [filteredCountries, setFilteredCountries] = useState('');
