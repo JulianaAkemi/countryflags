@@ -7,7 +7,9 @@ import { fetchCountries } from '../../services/countries';
 import { normalizeCountriesCard } from '../../utils/countriesCard';
 
 const Home = () => {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(null);
+  const [query, setQuery] = useState('');
+  const [filteredCountries, setFilteredCountries] = useState('');
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -15,6 +17,7 @@ const Home = () => {
         const response = await fetchCountries();
         const normalizedData = normalizeCountriesCard(response.data);
         setCountries(normalizedData);
+        setFilteredCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
       }
@@ -22,22 +25,38 @@ const Home = () => {
     handleFetchCountries();
   }, []);
 
-  if (!countries?.length) return <></>;
+  useEffect(() => {
+    if (query) {
+      const filteredData = countries.filter((item) =>
+        item.title.toLowerCase().includes(query.toLowerCase()),
+      );
+      setFilteredCountries(filteredData);
+    }
+  }, [query]);
+
+  if (!countries) return <></>;
 
   return (
     <Page>
       <PageTop>
         <div className='search'>
-          <SearchBar />
+          <SearchBar
+            prompt='Search for a country…'
+            getQuery={(inputValue) => setQuery(inputValue)}
+          />
         </div>
         <div className='filter'>
           <Filter prompt='Filter by Region' />
         </div>
       </PageTop>
       <CardsGrid>
-        {countries.map((item) => (
-          <Card item={item} key={item.id} className='card' />
-        ))}
+        {!!filteredCountries?.length ? (
+          filteredCountries.map((item) => (
+            <Card item={item} key={item.id} className='card' />
+          ))
+        ) : (
+          <div>No matches</div>
+        )}
       </CardsGrid>
     </Page>
   );

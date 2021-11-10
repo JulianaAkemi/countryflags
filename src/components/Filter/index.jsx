@@ -3,7 +3,7 @@ import { GrDown } from 'react-icons/gr';
 import { useState } from 'react';
 import { FormField } from '../FormField';
 
-const Filter = ({ prompt, selectWidth }) => {
+const Filter = ({ prompt }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -30,7 +30,7 @@ const Select = styled.div`
   position: relative;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: ${(selectWidth) => (selectWidth ? selectWidth : '100%')};
+    width: 100%;
   }
 
   &:hover {

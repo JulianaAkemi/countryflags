@@ -2,17 +2,35 @@ import styled from 'styled-components';
 import { GrSearch } from 'react-icons/gr';
 import { FormField } from '../FormField';
 
-const SearchBar = () => {
+const SearchBar = ({ prompt, getQuery }) => {
+  const onChange = (inputValue) => {
+    getQuery(inputValue);
+  };
+
   return (
-    <Search>
-      <Icon as={GrSearch} />
-      <input type='text' placeholder='Search for a country…' />
-    </Search>
+    <StyledSearch>
+      <Search>
+        <Icon as={GrSearch} />
+        <input
+          type='text'
+          placeholder={prompt}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      </Search>
+    </StyledSearch>
   );
 };
 
+const StyledSearch = styled.div`
+  position: relative;
+`;
+
 const Search = styled(FormField)`
   padding: 12px 16px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 100%;
+  }
 `;
 
 const Icon = styled.svg`
