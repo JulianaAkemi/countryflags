@@ -9,16 +9,13 @@ import { normalizeCountriesCard } from '../../utils/countriesCard';
 const Home = () => {
   const [countries, setCountries] = useState([]);
   const [query, setQuery] = useState('');
-<<<<<<< HEAD
+  const [searchedCountries, setSearchedCountries] = useState('');
   const options = Array.from(
     new Set(countries.map((option) => option.info[1].region)),
   ); //Array of objects of unique values
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
-  console.log('Home options loading', options);
-=======
   const [filteredCountries, setFilteredCountries] = useState('');
->>>>>>> 2b8719aa585779fa84b9e11d46d717189848e539
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -26,6 +23,7 @@ const Home = () => {
         const response = await fetchCountries();
         const normalizedData = normalizeCountriesCard(response.data);
         setCountries(normalizedData);
+        setSearchedCountries(normalizedData);
         setFilteredCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
@@ -36,27 +34,20 @@ const Home = () => {
 
   useEffect(() => {
     if (query) {
-      const filteredData = countries.filter((item) =>
+      const searchedData = countries.filter((item) =>
         item.title.toLowerCase().includes(query.toLowerCase()),
       );
-      setFilteredCountries(filteredData);
+      setSearchedCountries(searchedData);
     }
   }, [query]);
 
   useEffect(() => {
-    const handleFilterCountries = async () => {
-      try {
-        const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(response.data);
-        const newOption = normalizedData.filter((value) => {
-          return value.info[1].region.includes(filter);
-        });
-        if (newOption != 0) setCountries(newOption);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-    handleFilterCountries();
+    if (filter) {
+      const filteredData = countries.filter((item) =>
+        item.info[1].region.includes(filter),
+      );
+      setSearchedCountries(filteredData);
+    }
   }, [filter]);
 
   if (!countries?.length) return <></>;
@@ -81,8 +72,8 @@ const Home = () => {
         </div>
       </PageTop>
       <CardsGrid>
-        {!!filteredCountries?.length ? (
-          filteredCountries.map((item) => (
+        {!!searchedCountries?.length ? (
+          searchedCountries.map((item) => (
             <Card item={item} key={item.id} className='card' />
           ))
         ) : (

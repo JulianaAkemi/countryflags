@@ -15,7 +15,6 @@ const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
     onChange(e.target.innerText);
     getFilter(e.target.innerText);
     setOpen(false);
-    (e) => onSelection(e.target.innerText);
   };
 
   useEffect(() => {
