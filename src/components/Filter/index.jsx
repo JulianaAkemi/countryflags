@@ -5,27 +5,27 @@ import { FormField } from '../FormField';
 
 const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
   const [open, setOpen] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef();
+  useOnClickOutside(ref, () => setOpen((prev) => !prev));
 
-  const close = (e) => {
-    switch (e.target) {
-      case ref:
-        setOpen((prev) => !prev);
-        break;
-      case ref.current:
-        setOpen((prev) => !prev);
-        break;
-      case ref.current.children[0]:
-        setOpen((prev) => !prev);
-        break;
-      case ref.current.children[1]:
-        setOpen((prev) => !prev);
-        break;
-      default:
-        setOpen(false);
-        break;
-    }
-  };
+  function useOnClickOutside(ref, handler) {
+    useEffect(() => {
+      const listener = (event) => {
+        if (!ref.current || ref.current.contains(event.target)) {
+          handler(event);
+        }
+        return;
+      };
+
+      document.addEventListener('mousedown', listener);
+      document.addEventListener('touchstart', listener);
+
+      return () => {
+        document.removeEventListener('mousedown', listener);
+        document.removeEventListener('touchstart', listener);
+      };
+    }, [ref, handler]);
+  }
 
   const handleSelection = (e) => {
     onChange(e.target.innerText);
@@ -33,14 +33,9 @@ const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    document.addEventListener('click', close);
-    return () => document.removeEventListener('click', close);
-  }, []);
-
   return (
     <Select>
-      <Control className='container' ref={ref}>
+      <Control ref={ref}>
         <p>{optionValue ? optionValue : prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>
