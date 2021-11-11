@@ -16,13 +16,15 @@ function App() {
         <GlobalStyle />
         <Navbar />
 
-        <Routes>
-          <AlignedWrapper>
-            <Container>
+        <AlignedWrapper>
+          <Container>
+            <Routes>
               <Route exact path='/' element={<Home />} />
-            </Container>
-          </AlignedWrapper>
+            </Routes>
+          </Container>
+        </AlignedWrapper>
 
+        <Routes>
           <Route path='/card-details' element={<CardDetailsPage />} />
         </Routes>
       </ThemeProvider>
