@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
-import Home from './views/Home';
+import CardDetailsPage from './views/CardDetails';
 
 function App() {
   return (
@@ -14,10 +14,10 @@ function App() {
       <Navbar />
 
       <AlignedWrapper>
-        <Container>
-          <Home />
-        </Container>
+        <Container></Container>
       </AlignedWrapper>
+
+      <CardDetailsPage />
     </ThemeProvider>
   );
 }
