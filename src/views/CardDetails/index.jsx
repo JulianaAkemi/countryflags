@@ -3,15 +3,21 @@ import styled from 'styled-components';
 import CardDetails from '../../components/CardDetails';
 import { BsArrowLeft } from 'react-icons/bs';
 import Container from '../../components/Container';
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 import AlignedWrapper from '../../components/AlignedWrapper';
+import { useNavigate } from 'react-router-dom';
 
 const CardDetailsPage = () => {
+  let navigate = useNavigate();
+
+  function handleGoBack() {
+    navigate('/');
+  }
+
   return (
     <Page>
       <AlignedWrapper>
         <Container>
-          <GoBack>
+          <GoBack onClick={handleGoBack}>
             <p>
               <Icon as={BsArrowLeft} />
               Back

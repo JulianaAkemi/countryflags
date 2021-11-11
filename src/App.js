@@ -5,20 +5,28 @@ import Navbar from './components/Navbar';
 import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
+import Home from './views/Home';
 import CardDetailsPage from './views/CardDetails';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Navbar />
+    <Router>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Navbar />
 
-      <AlignedWrapper>
-        <Container></Container>
-      </AlignedWrapper>
+        <Routes>
+          <AlignedWrapper>
+            <Container>
+              <Route exact path='/' element={<Home />} />
+            </Container>
+          </AlignedWrapper>
 
-      <CardDetailsPage />
-    </ThemeProvider>
+          <Route path='/card-details' element={<CardDetailsPage />} />
+        </Routes>
+      </ThemeProvider>
+    </Router>
   );
 }
 
