@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import CardDetails from '../../components/CardDetails';
 import { BsArrowLeft } from 'react-icons/bs';
 import Container from '../../components/Container';
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 import AlignedWrapper from '../../components/AlignedWrapper';
 
 const CardDetailsPage = () => {
@@ -32,7 +31,7 @@ const Page = styled.div`
 `;
 
 const GoBack = styled.div`
-  margin: 40px 0;
+  margin: 17px 0;
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
@@ -50,6 +49,7 @@ const GoBack = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin: 25px 0;
   }
 `;
 
