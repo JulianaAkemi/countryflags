@@ -28,6 +28,10 @@ const StyledSearch = styled.div`
 const Search = styled(FormField)`
   padding: 12px 16px;
 
+  input {
+    width: 100%;
+  }
+
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 100%;
   }
