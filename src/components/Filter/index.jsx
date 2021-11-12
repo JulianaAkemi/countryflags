@@ -2,30 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { GrDown } from 'react-icons/gr';
 import { FormField } from '../FormField';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 
 const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
-  useOnClickOutside(ref, () => setOpen((prev) => !prev));
-
-  function useOnClickOutside(ref, handler) {
-    useEffect(() => {
-      const listener = (event) => {
-        if (!ref.current || ref.current.contains(event.target)) {
-          handler(event);
-        }
-        return;
-      };
-
-      document.addEventListener('mousedown', listener);
-      document.addEventListener('touchstart', listener);
-
-      return () => {
-        document.removeEventListener('mousedown', listener);
-        document.removeEventListener('touchstart', listener);
-      };
-    }, [ref, handler]);
-  }
+  useOnClickOutside(ref, () => setOpen(false));
 
   const handleSelection = (e) => {
     onChange(e.target.innerText);
@@ -34,8 +16,8 @@ const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
   };
 
   return (
-    <Select>
-      <Control ref={ref}>
+    <Select ref={ref}>
+      <Control onClick={() => setOpen(!open)}>
         <p>{optionValue ? optionValue : prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>

@@ -15,7 +15,6 @@ const Home = () => {
   );
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
-  const [filteredCountries, setFilteredCountries] = useState('');
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -24,7 +23,6 @@ const Home = () => {
         const normalizedData = normalizeCountriesCard(response.data);
         setCountries(normalizedData);
         setSearchedCountries(normalizedData);
-        setFilteredCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
       }
