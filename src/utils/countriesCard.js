@@ -1,5 +1,5 @@
 export const normalizeCountriesCard = (countriesList) => {
-  return countriesList.map((country) => {
+  countriesList.map((country) => {
     let item = {
       image: country.flag,
       title: country.name,

@@ -7,7 +7,7 @@ const Card = ({ item }) => {
   let navigate = useNavigate();
 
   function goToDetails() {
-    navigate('/card-details');
+    navigate(`/card-details/${item.title}`);
   }
 
   if (!item || Object.keys(item).length === 0) return <></>;

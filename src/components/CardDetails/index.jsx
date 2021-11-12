@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 import AlignedWrapper from '../AlignedWrapper';
 import Container from '../Container';
-import { cardDetailsExample as item } from '../../testAPI';
 
-const CardDetails = () => {
+const CardDetails = ({ item }) => {
   if (Object.keys(item).length === 0) return <></>;
 
   const links = item[Object.keys(item)[6]].split(',');
@@ -13,25 +12,17 @@ const CardDetails = () => {
   return (
     <DetailsSection>
       <DetailsImage>
-        {item[Object.keys(item)[0]] ? (
-          <img src={item[Object.keys(item)[0]]} />
-        ) : (
-          <img src={noImage} />
-        )}
+        {item.image ? <img src={item.image} /> : <img src={noImage} />}
       </DetailsImage>
 
       <AlignedWrapper>
         <Container>
           <CardDetailsInfo>
             <DetailsImageDesktop>
-              {item[Object.keys(item)[0]] ? (
-                <img src={item[Object.keys(item)[0]]} />
-              ) : (
-                <img src={noImage} />
-              )}
+              {item.image ? <img src={item.image} /> : <img src={noImage} />}
             </DetailsImageDesktop>
             <div>
-              <h2>{item[Object.keys(item)[5]]}</h2>
+              <h2>{item.title}</h2>
 
               <div className='text-info'>
                 <p>

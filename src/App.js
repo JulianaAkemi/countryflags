@@ -6,7 +6,7 @@ import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
 import Home from './views/Home';
-import CardDetailsPage from './views/CardDetails';
+import CardDetailsPage from './views/CardDetailsPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -19,13 +19,14 @@ function App() {
         <AlignedWrapper>
           <Container>
             <Routes>
-              <Route exact path='/' element={<Home />} />
+              <Route path='/' element={<Home />} />
             </Routes>
           </Container>
         </AlignedWrapper>
 
         <Routes>
-          <Route path='/card-details' element={<CardDetailsPage />} />
+          <Route path='/card-details/*' element={<CardDetailsPage />} />
+          <Route path='*' element={<h1>Page not found!</h1>} />
         </Routes>
       </ThemeProvider>
     </Router>
