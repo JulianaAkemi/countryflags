@@ -1,24 +1,37 @@
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { GrDown } from 'react-icons/gr';
-import { useState } from 'react';
 import { FormField } from '../FormField';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 
-const Filter = ({ prompt }) => {
+const Filter = ({ prompt, options, optionValue, onChange, getFilter }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
+  useOnClickOutside(ref, () => setOpen(false));
+
+  const handleSelection = (e) => {
+    onChange(e.target.innerText);
+    getFilter(e.target.innerText);
+    setOpen(false);
+  };
 
   return (
-    <Select>
-      <Control onClick={() => setOpen((prev) => !prev)}>
-        <p>{prompt}</p>
+    <Select ref={ref}>
+      <Control onClick={() => setOpen(!open)}>
+        <p>{optionValue ? optionValue : prompt}</p>
         <Icon as={GrDown} className={`${open ? 'arrow-open' : null}`} />
       </Control>
       <Options className={`${open ? 'options-open' : null}`}>
         <ul>
-          <li>TEST</li>
-          <li>TEST</li>
-          <li>TEST</li>
-          <li>TEST</li>
-          <li>TEST</li>
+          {options.map((option) => (
+            <li
+              key={option}
+              className={`${optionValue === option ? 'selected' : null}`}
+              onClick={handleSelection}
+            >
+              {option}
+            </li>
+          ))}
         </ul>
       </Options>
     </Select>
@@ -88,12 +101,16 @@ const Options = styled.div(
 
     li {
       padding: 6px 0 6px 24px;
+
+      &:hover {
+        background: ${theme.colors.inputText};
+        color: ${theme.colors.elements};
+      }
     }
 
-    li:hover {
-      background: ${theme.colors.inputText};
-      color: ${theme.colors.elements};
-    }  
+    .selected {
+      background: ${theme.colors.outline};
+    }
 `,
 );
 
