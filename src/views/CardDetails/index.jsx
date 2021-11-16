@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CardDetails from '../../components/CardDetails';
 import { BsArrowLeft } from 'react-icons/bs';
 import Container from '../../components/Container';
 import AlignedWrapper from '../../components/AlignedWrapper';
+import { normalizeCountryDetails } from '../../utils/countryDetail';
+import { fetchCountries } from '../../services/countries';
 
 const CardDetailsPage = () => {
+  const [country, setCountry] = useState([]);
+
+  useEffect(() => {
+    const handleFetchCountries = async () => {
+      try {
+        const response = await fetchCountries();
+        const normalizedData = normalizeCountryDetails(response.data);
+        const countryDetail = normalizedData.find(
+          (country) => country.title === 'China',
+        );
+        setCountry(countryDetail);
+        console.log(country);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    handleFetchCountries();
+  }, []);
+
   return (
     <Page>
       <AlignedWrapper>
@@ -18,7 +39,7 @@ const CardDetailsPage = () => {
           </GoBack>
         </Container>
       </AlignedWrapper>
-      <CardDetails />
+      <CardDetails item={country} />
     </Page>
   );
 };
