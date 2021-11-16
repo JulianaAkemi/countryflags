@@ -19,7 +19,6 @@ const CardDetailsPage = () => {
           (country) => country.title === 'China',
         );
         setCountry(countryDetail);
-        console.log(country);
       } catch (error) {
         console.error(error.message);
       }
