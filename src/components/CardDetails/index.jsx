@@ -8,7 +8,7 @@ import { cardDetailsExample as item } from '../../testAPI';
 const CardDetails = () => {
   if (Object.keys(item).length === 0) return <></>;
 
-  const links = item[Object.keys(item)[6]].split(',');
+  const links = item['Border Countries'].split(',');
 
   return (
     <DetailsSection>

@@ -5,6 +5,7 @@ import Filter from '../../components/Filter';
 import SearchBar from '../../components/SearchBar';
 import { fetchCountries } from '../../services/countries';
 import { normalizeCountriesCard } from '../../utils/countriesCard';
+import useGetCountries from '../../context/getCountries';
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
@@ -16,19 +17,21 @@ const Home = () => {
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
 
-  useEffect(() => {
-    const handleFetchCountries = async () => {
-      try {
-        const response = await fetchCountries();
-        const normalizedData = normalizeCountriesCard(response.data);
-        setCountries(normalizedData);
-        setSearchedCountries(normalizedData);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-    handleFetchCountries();
-  }, []);
+  // useEffect(() => {
+  //   const handleFetchCountries = async () => {
+  //     try {
+  //       const response = await fetchCountries();
+  //       const normalizedData = normalizeCountriesCard(response.data);
+  //       setCountries(normalizedData);
+  //       setSearchedCountries(normalizedData);
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     }
+  //   };
+  //   handleFetchCountries();
+  // }, []);
+
+  useGetCountries(setCountries, setSearchedCountries);
 
   useEffect(() => {
     if (query) {
@@ -71,9 +74,9 @@ const Home = () => {
       </PageTop>
       <CardsGrid>
         {!!searchedCountries?.length ? (
-          searchedCountries.map((item) => (
-            <Card item={item} key={item.id} className='card' />
-          ))
+          searchedCountries
+            .slice(0, 8)
+            .map((item) => <Card item={item} key={item.id} className='card' />)
         ) : (
           <div>No matches</div>
         )}

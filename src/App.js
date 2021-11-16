@@ -6,6 +6,7 @@ import { GlobalStyle } from './components/Theme/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import theme from './components/Theme/Theme';
 import CardDetailsPage from './views/CardDetails';
+import Home from './views/Home';
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
       <Navbar />
 
       <AlignedWrapper>
-        <Container></Container>
+        <Container>
+          <Home />
+        </Container>
       </AlignedWrapper>
 
-      <CardDetailsPage />
+      {/* <CardDetailsPage /> */}
     </ThemeProvider>
   );
 }
