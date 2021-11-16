@@ -61,12 +61,12 @@ const CardDetails = ({ item }) => {
               </div>
 
               <LinkList>
-                <h3>{[Object.keys(item)[4]]}:</h3>
+                <h3>{[Object.keys(item)[3]]}:</h3>
 
                 {!links[0] == '' ? (
                   links.map((item) => <a key={item}>{item}</a>)
                 ) : (
-                  <p>There are no {[Object.keys(item)[4]]}.</p>
+                  <p>There are no {[Object.keys(item)[3]]}.</p>
                 )}
               </LinkList>
             </div>
@@ -141,7 +141,7 @@ const CardDetailsInfo = styled.div`
     display: flex;
 
     .text-info {
-      height: 130px;
+      height: 150px;
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
@@ -158,7 +158,7 @@ const LinkList = styled.div`
   margin-top: 32px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    margin-top: 64px;
+    margin-top: 43px;
   }
 
   p {
