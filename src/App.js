@@ -15,16 +15,18 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Navbar />
-
-        <AlignedWrapper>
-          <Container>
-            <Routes>
-              <Route path='/' element={<Home />} />
-            </Routes>
-          </Container>
-        </AlignedWrapper>
-
         <Routes>
+          <Route
+            exact
+            path='/'
+            element={
+              <AlignedWrapper>
+                <Container>
+                  <Home />
+                </Container>
+              </AlignedWrapper>
+            }
+          />
           <Route path='/card-details/*' element={<CardDetailsPage />} />
           <Route path='*' element={<h1>Page not found!</h1>} />
         </Routes>

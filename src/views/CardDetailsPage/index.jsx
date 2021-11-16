@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CardDetails from '../../components/CardDetails';
 import { BsArrowLeft } from 'react-icons/bs';
@@ -7,11 +7,12 @@ import AlignedWrapper from '../../components/AlignedWrapper';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import { fetchCountries } from '../../services/countries';
-import { normalizeCountryCardDetail } from '../../utils/countriesCardDetails';
+import { normalizeCountryCardDetail } from '../../utils/countryCardDetail';
 
 const CardDetailsPage = () => {
+  const [countries, setCountries] = useState(null);
   const navigate = useNavigate();
-  const item = useLocation();
+  // const item = useLocation();
 
   useEffect(() => {
     const handleFetchCountry = async () => {
@@ -42,7 +43,7 @@ const CardDetailsPage = () => {
           </GoBack>
         </Container>
       </AlignedWrapper>
-      <CardDetails item={item} />
+      <CardDetails />
     </Page>
   );
 };

@@ -16,6 +16,7 @@ const Home = () => {
       try {
         const response = await fetchCountries();
         const normalizedData = normalizeCountriesCard(response.data);
+        console.log(normalizedData);
         setCountries(normalizedData);
         setFilteredCountries(normalizedData);
       } catch (error) {
@@ -33,6 +34,8 @@ const Home = () => {
       setFilteredCountries(filteredData);
     }
   }, [query]);
+
+  console.log(countries);
 
   if (!countries) return <></>;
 

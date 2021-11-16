@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 import AlignedWrapper from '../AlignedWrapper';
 import Container from '../Container';
+import { cardDetailsExample as item } from '../../testAPI';
 
-const CardDetails = ({ item }) => {
+const CardDetails = () => {
   if (Object.keys(item).length === 0) return <></>;
 
   const links = item[Object.keys(item)[6]].split(',');

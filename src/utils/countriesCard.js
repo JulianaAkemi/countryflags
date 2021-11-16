@@ -1,4 +1,4 @@
-export const normalizeCountriesCard = (countriesList) => {
+export const normalizeCountriesCard = (countriesList) =>
   countriesList.map((country) => {
     let item = {
       image: country.flag,
@@ -12,4 +12,3 @@ export const normalizeCountriesCard = (countriesList) => {
     };
     return item;
   });
-};
