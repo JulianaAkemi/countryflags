@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
+import { fetchBorderCountries } from '../../services/borderCountries';
 import AlignedWrapper from '../AlignedWrapper';
 import Container from '../Container';
-import { cardDetailsExample as item } from '../../testAPI';
 
-const CardDetails = () => {
+const CardDetails = ({ item }) => {
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    const handleFetchBorderCountries = async () => {
+      try {
+        const response = await fetchBorderCountries();
+        const neighbours = response.data.list;
+
+        const letters = item['Border Countries'].split(',');
+        const newList = [];
+        for (const [key, value] of Object.entries(neighbours)) {
+          letters.forEach((letter) => {
+            if (letter == key) {
+              newList.push(value);
+            }
+          });
+        }
+        setLinks(newList);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    handleFetchBorderCountries();
+  }, []);
+
   if (Object.keys(item).length === 0) return <></>;
-
-  const links = item[Object.keys(item)[6]].split(',');
-
   return (
     <DetailsSection>
       <DetailsImage>
@@ -26,39 +48,25 @@ const CardDetails = () => {
               <h2>{item.title}</h2>
 
               <div className='text-info'>
-                <p>
-                  <strong>{[Object.keys(item)[7]]}:</strong>{' '}
-                  {item[Object.keys(item)[7]]}
-                </p>
-                <p>
-                  <strong>{[Object.keys(item)[2]]}:</strong>{' '}
-                  {item[Object.keys(item)[2]]}
-                </p>
-                <p>
-                  <strong>{[Object.keys(item)[1]]}:</strong>{' '}
-                  {item[Object.keys(item)[1]]}
-                </p>
-                <p>
-                  <strong>{[Object.keys(item)[8]]}:</strong>{' '}
-                  {item[Object.keys(item)[8]]}
-                </p>
-                <p>
-                  <strong>{[Object.keys(item)[3]]}:</strong>{' '}
-                  {item[Object.keys(item)[3]]}
-                </p>
-                <p>
-                  <strong>{[Object.keys(item)[4]]}:</strong>{' '}
-                  {item[Object.keys(item)[4]]}
-                </p>
+                {item.details ? (
+                  item.details.map((detail, index) => (
+                    <p key={index}>
+                      <strong>{[Object.keys(detail)]}:</strong>{' '}
+                      {detail[Object.keys(detail)]}
+                    </p>
+                  ))
+                ) : (
+                  <p>No information available.</p>
+                )}
               </div>
 
               <LinkList>
-                <h3>Border Countries:</h3>
+                <h3>{[Object.keys(item)[3]]}:</h3>
 
                 {!links[0] == '' ? (
                   links.map((item) => <a key={item}>{item}</a>)
                 ) : (
-                  <p>There are no border countries.</p>
+                  <p>There are no {[Object.keys(item)[3]]}.</p>
                 )}
               </LinkList>
             </div>
@@ -133,7 +141,7 @@ const CardDetailsInfo = styled.div`
     display: flex;
 
     .text-info {
-      height: 130px;
+      height: 150px;
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
@@ -150,7 +158,7 @@ const LinkList = styled.div`
   margin-top: 32px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    margin-top: 64px;
+    margin-top: 43px;
   }
 
   p {

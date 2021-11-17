@@ -13,7 +13,7 @@ const Card = ({ item }) => {
   if (!item || Object.keys(item).length === 0) return <></>;
 
   return (
-    <div className='card' onClick={goToDetails}>
+    <StyledCard className='card' onClick={goToDetails}>
       <CardImage>
         {item.image ? <img src={item.image} /> : <img src={noImage} />}
       </CardImage>
@@ -25,9 +25,15 @@ const Card = ({ item }) => {
           </p>
         ))}
       </CardInfo>
-    </div>
+    </StyledCard>
   );
 };
+
+const StyledCard = styled.div`
+  :hover {
+    cursor: pointer;
+  }
+`;
 
 const CardImage = styled.div`
   img {

@@ -7,9 +7,14 @@ import { fetchCountries } from '../../services/countries';
 import { normalizeCountriesCard } from '../../utils/countriesCard';
 
 const Home = () => {
-  const [countries, setCountries] = useState(null);
+  const [countries, setCountries] = useState([]);
   const [query, setQuery] = useState('');
-  const [filteredCountries, setFilteredCountries] = useState('');
+  const [searchedCountries, setSearchedCountries] = useState('');
+  const options = Array.from(
+    new Set(countries.map((option) => option.info[1].region)),
+  );
+  const [filter, setFilter] = useState('');
+  const [optionValue, setOptionValue] = useState(null);
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -18,7 +23,7 @@ const Home = () => {
         const normalizedData = normalizeCountriesCard(response.data);
         console.log(normalizedData);
         setCountries(normalizedData);
-        setFilteredCountries(normalizedData);
+        setSearchedCountries(normalizedData);
       } catch (error) {
         console.error(error.message);
       }
@@ -28,16 +33,23 @@ const Home = () => {
 
   useEffect(() => {
     if (query) {
-      const filteredData = countries.filter((item) =>
+      const searchedData = countries.filter((item) =>
         item.title.toLowerCase().includes(query.toLowerCase()),
       );
-      setFilteredCountries(filteredData);
+      setSearchedCountries(searchedData);
     }
   }, [query]);
 
-  console.log(countries);
+  useEffect(() => {
+    if (filter) {
+      const filteredData = countries.filter((item) =>
+        item.info[1].region.includes(filter),
+      );
+      setSearchedCountries(filteredData);
+    }
+  }, [filter]);
 
-  if (!countries) return <></>;
+  if (!countries?.length) return <></>;
 
   return (
     <Page>
@@ -49,12 +61,18 @@ const Home = () => {
           />
         </div>
         <div className='filter'>
-          <Filter prompt='Filter by Region' />
+          <Filter
+            prompt='Filter by Region'
+            options={options}
+            getFilter={(filter) => setFilter(filter)}
+            optionValue={optionValue}
+            onChange={(option) => setOptionValue(option)}
+          />
         </div>
       </PageTop>
       <CardsGrid>
-        {!!filteredCountries?.length ? (
-          filteredCountries.map((item) => (
+        {!!searchedCountries?.length ? (
+          searchedCountries.map((item) => (
             <Card item={item} key={item.id} className='card' />
           ))
         ) : (
@@ -87,7 +105,7 @@ const PageTop = styled.div`
       width: 327px;
     }
     .filter {
-      width: 242px;
+      width: 327px;
     }
   }
 `;

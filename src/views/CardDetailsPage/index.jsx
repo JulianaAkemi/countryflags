@@ -4,22 +4,22 @@ import CardDetails from '../../components/CardDetails';
 import { BsArrowLeft } from 'react-icons/bs';
 import Container from '../../components/Container';
 import AlignedWrapper from '../../components/AlignedWrapper';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router';
+import { normalizeCountryDetails } from '../../utils/countryDetail';
 import { fetchCountries } from '../../services/countries';
-import { normalizeCountryCardDetail } from '../../utils/countryCardDetail';
 
 const CardDetailsPage = () => {
-  const [countries, setCountries] = useState(null);
+  const [country, setCountry] = useState([]);
   const navigate = useNavigate();
-  // const item = useLocation();
 
   useEffect(() => {
-    const handleFetchCountry = async () => {
+    const handleFetchCountries = async () => {
       try {
         const response = await fetchCountries();
-        const normalizedData = normalizeCountryCardDetail(response.data);
-        setCountries(normalizedData);
+        const normalizedData = normalizeCountryDetails(response.data);
+        const countryDetail = normalizedData.find(
+          (country) => country.title === 'China',
+        );
+        setCountry(countryDetail);
       } catch (error) {
         console.error(error.message);
       }
@@ -43,7 +43,7 @@ const CardDetailsPage = () => {
           </GoBack>
         </Container>
       </AlignedWrapper>
-      <CardDetails />
+      <CardDetails item={country} />
     </Page>
   );
 };
@@ -56,7 +56,7 @@ const Page = styled.div`
 `;
 
 const GoBack = styled.div`
-  margin: 40px 0;
+  margin: 17px 0;
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
@@ -74,6 +74,7 @@ const GoBack = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin: 25px 0;
   }
 `;
 
