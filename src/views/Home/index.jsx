@@ -21,7 +21,6 @@ const Home = () => {
       try {
         const response = await fetchCountries();
         const normalizedData = normalizeCountriesCard(response.data);
-        console.log(normalizedData);
         setCountries(normalizedData);
         setSearchedCountries(normalizedData);
       } catch (error) {

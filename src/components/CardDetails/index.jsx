@@ -14,10 +14,10 @@ const CardDetails = ({ item }) => {
         const response = await fetchBorderCountries();
         const neighbours = response.data.list;
 
-        const letters = item['Border Countries'].split(',');
+        const linkList = item['Border Countries'].split(',');
         const newList = [];
         for (const [key, value] of Object.entries(neighbours)) {
-          letters.forEach((letter) => {
+          linkList.forEach((letter) => {
             if (letter == key) {
               newList.push(value);
             }
@@ -29,9 +29,10 @@ const CardDetails = ({ item }) => {
       }
     };
     handleFetchBorderCountries();
-  }, []);
+  }, [item['Border Countries']]);
 
   if (Object.keys(item).length === 0) return <></>;
+
   return (
     <DetailsSection>
       <DetailsImage>
@@ -46,7 +47,6 @@ const CardDetails = ({ item }) => {
             </DetailsImageDesktop>
             <div>
               <h2>{item.title}</h2>
-
               <div className='text-info'>
                 {item.details ? (
                   item.details.map((detail, index) => (
