@@ -6,20 +6,28 @@ import Container from '../../components/Container';
 import AlignedWrapper from '../../components/AlignedWrapper';
 import { normalizeCountryDetails } from '../../utils/countryDetail';
 import { fetchCountries } from '../../services/countries';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const CardDetailsPage = () => {
   const [country, setCountry] = useState([]);
   const navigate = useNavigate();
+  let [searchParams] = useSearchParams();
+  let selectedCountry = searchParams.get('country');
 
   useEffect(() => {
     const handleFetchCountry = async () => {
       try {
         const response = await fetchCountries();
         const normalizedData = normalizeCountryDetails(response.data);
+        if (!selectedCountry) {
+          throw new Error('Country does not exist!');
+        }
         const countryDetail = normalizedData.find(
-          (country) => country.title === 'China',
+          (country) => country.title === selectedCountry,
         );
+        if (!countryDetail) {
+          throw new Error('Country does not exist!');
+        }
         setCountry(countryDetail);
       } catch (error) {
         console.error(error.message);
