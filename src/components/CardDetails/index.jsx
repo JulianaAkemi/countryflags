@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 import { fetchBorderCountries } from '../../services/borderCountries';
@@ -7,6 +8,11 @@ import Container from '../Container';
 
 const CardDetails = ({ item }) => {
   const [links, setLinks] = useState([]);
+  let navigate = useNavigate();
+
+  function goToDetails(name) {
+    navigate(`/card-details/?country=${name}`);
+  }
 
   useEffect(() => {
     const handleFetchBorderCountries = async () => {
@@ -64,7 +70,11 @@ const CardDetails = ({ item }) => {
                 <h3>{[Object.keys(item)[3]]}:</h3>
 
                 {!links[0] == '' ? (
-                  links.map((item) => <a key={item}>{item}</a>)
+                  links.map((item) => (
+                    <a onClick={() => goToDetails(item)} key={item}>
+                      {item}
+                    </a>
+                  ))
                 ) : (
                   <p>There are no {[Object.keys(item)[3]]}.</p>
                 )}
