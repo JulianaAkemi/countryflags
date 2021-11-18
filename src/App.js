@@ -8,18 +8,17 @@ import { lightTheme, darkTheme } from './components/Theme/Theme';
 import Home from './views/Home';
 import CardDetailsPage from './views/CardDetailsPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useDarkMode } from './utils/useDarkMode';
 
 function App() {
-  const [theme, setTheme] = useState(true);
-  const toggleTheme = () => {
-    setTheme((theme) => !theme);
-  };
+  const [theme, themeToggler] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
   return (
     <Router>
-      <ThemeProvider theme={theme ? lightTheme : darkTheme}>
+      <ThemeProvider theme={themeMode}>
         <GlobalStyle />
-        <Navbar switchTheme={toggleTheme} />
+        <Navbar switchTheme={themeToggler} />
         <Routes>
           <Route
             exact
