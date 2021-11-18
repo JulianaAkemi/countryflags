@@ -1,12 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import noImage from '../../assets/no-image-available.png';
 
 const Card = ({ item }) => {
+  let navigate = useNavigate();
+
+  function goToDetails() {
+    navigate(`/card-details/${item.title}`);
+  }
+
   if (!item || Object.keys(item).length === 0) return <></>;
 
   return (
-    <StyledCard className='card'>
+    <StyledCard className='card' onClick={goToDetails}>
       <CardImage>
         {item.image ? <img src={item.image} /> : <img src={noImage} />}
       </CardImage>

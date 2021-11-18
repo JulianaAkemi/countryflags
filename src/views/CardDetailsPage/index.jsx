@@ -6,12 +6,14 @@ import Container from '../../components/Container';
 import AlignedWrapper from '../../components/AlignedWrapper';
 import { normalizeCountryDetails } from '../../utils/countryDetail';
 import { fetchCountries } from '../../services/countries';
+import { useNavigate } from 'react-router-dom';
 
 const CardDetailsPage = () => {
   const [country, setCountry] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleFetchCountries = async () => {
+    const handleFetchCountry = async () => {
       try {
         const response = await fetchCountries();
         const normalizedData = normalizeCountryDetails(response.data);
@@ -23,14 +25,18 @@ const CardDetailsPage = () => {
         console.error(error.message);
       }
     };
-    handleFetchCountries();
+    handleFetchCountry();
   }, []);
+
+  function handleGoBack() {
+    navigate('/');
+  }
 
   return (
     <Page>
       <AlignedWrapper>
         <Container>
-          <GoBack>
+          <GoBack onClick={handleGoBack}>
             <p>
               <Icon as={BsArrowLeft} />
               Back
