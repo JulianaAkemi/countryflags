@@ -34,7 +34,7 @@ const CardDetailsPage = () => {
       }
     };
     handleFetchCountry();
-  }, []);
+  }, [selectedCountry]);
 
   function handleGoBack() {
     navigate('/');
