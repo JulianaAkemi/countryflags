@@ -4,14 +4,14 @@ import { IoMoonOutline } from 'react-icons/io5';
 import Container from '../../components/Container';
 import AlignedWrapper from '../../components/AlignedWrapper';
 
-const Navbar = () => {
+const Navbar = ({ switchTheme }) => {
   return (
     <StyledNav>
       <AlignedWrapper>
         <Container>
           <NavContainer>
             <Title>Where in the world?</Title>
-            <ThemeMode>
+            <ThemeMode onClick={() => switchTheme()}>
               <Icon as={IoMoonOutline} />
               <p>Dark Mode</p>
             </ThemeMode>

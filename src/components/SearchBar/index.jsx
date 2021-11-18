@@ -29,6 +29,7 @@ const Search = styled(FormField)`
   padding: 12px 16px;
 
   input {
+    color: ${({ theme }) => theme.colors.inputText};
     width: 100%;
   }
 
