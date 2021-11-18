@@ -66,12 +66,15 @@ const ThemeMode = styled.div(
 `,
 );
 
-const Icon = styled.svg`
+const Icon = styled.svg(
+  ({ theme }) => `
   margin-right: 15px;
 
   path {
-    stroke: ${({ theme }) => theme.colors.text};
+
+    fill: ${theme.colors.text == '#ffffff' ? theme.colors.text : 'none'};
   }
-`;
+  `,
+);
 
 export default Navbar;
