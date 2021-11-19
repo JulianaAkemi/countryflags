@@ -45,7 +45,7 @@ const CardImage = styled.div`
     }
     object-fit: cover;
     border-radius: 2px 2px 0px 0px;
-    margin-bottom: -5px;
+    margin-bottom: -7px;
   }
 `;
 
