@@ -5,6 +5,7 @@ import Filter from '../../components/Filter';
 import SearchBar from '../../components/SearchBar';
 import { fetchCountries } from '../../services/countries';
 import { normalizeCountriesCard } from '../../utils/countriesCard';
+import ReactPaginate from 'react-paginate';
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
@@ -15,6 +16,15 @@ const Home = () => {
   );
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const cardsPerPage = 8;
+  const pagesVisited = pageNumber * cardsPerPage;
+  const pageCount = Math.ceil(searchedCountries.length / cardsPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -71,19 +81,65 @@ const Home = () => {
       </PageTop>
       <CardsGrid>
         {!!searchedCountries?.length ? (
-          searchedCountries.map((item) => (
-            <Card item={item} key={item.id} className='card' />
-          ))
+          searchedCountries
+            .slice(pagesVisited, pagesVisited + cardsPerPage)
+            .map((item) => <Card item={item} key={item.id} className='card' />)
         ) : (
           <div>No matches</div>
         )}
       </CardsGrid>
+      <div className='page-count'>
+        <ReactPaginate
+          previousLabel={'Previous'}
+          nextLabel={'Next'}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={'paginationBttns'}
+          previousLinkClassName={'previousBttn'}
+          nextLinkClassName={'nextBttn'}
+          disabledClassName={'paginationDisabled'}
+          activeClassName={'paginationActive'}
+        />
+      </div>
     </Page>
   );
 };
 
 const Page = styled.div`
   margin-bottom: 58px;
+
+  .paginationBttns {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 15px;
+  }
+
+  .paginationBttns a {
+    color: ${({ theme }) => theme.colors.text};
+    cursor: pointer;
+    border: 1px solid ${({ theme }) => theme.colors.text};
+    padding: 3px 15px;
+  }
+
+  .paginationActive a,
+  .paginationBttns a:hover {
+    background-color: ${({ theme }) => theme.colors.elements};
+    border: 3px solid ${({ theme }) => theme.colors.text};
+    font-weight: 700;
+  }
+
+  .paginationDisabled a {
+    color: ${({ theme }) => theme.colors.outline};
+    cursor: pointer;
+    border: 1px solid ${({ theme }) => theme.colors.outline};
+
+    &:hover {
+      pointer-events: none;
+    }
+  }
+
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin-bottom: 80px;
   }
