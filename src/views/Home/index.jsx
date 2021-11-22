@@ -96,7 +96,7 @@ const Home = () => {
       <CardsGrid>
         <Items currentItems={currentItems} />
       </CardsGrid>
-      <div className='page-count'>
+      <div>
         <ReactPaginate
           previousLabel={'Previous'}
           nextLabel={'Next'}
@@ -121,8 +121,11 @@ const Page = styled.div`
   .paginationBttns {
     margin-top: 80px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+    height: 100px;
+    gap: 25px 15px;
   }
 
   .paginationBttns a {
@@ -130,7 +133,7 @@ const Page = styled.div`
     cursor: pointer;
     border: 1px solid ${({ theme }) => theme.colors.text};
     padding: 3px 15px;
-    margin: 0 8px;
+    /* margin: 10px 8px; */
   }
 
   .paginationActive a,
