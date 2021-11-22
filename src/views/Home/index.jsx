@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Card from '../../components/Card';
 import Filter from '../../components/Filter';
 import SearchBar from '../../components/SearchBar';
 import { fetchCountries } from '../../services/countries';
 import { normalizeCountriesCard } from '../../utils/countriesCard';
 import ReactPaginate from 'react-paginate';
+import Items from './Items';
+
+const cardsPerPage = 8;
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
@@ -17,14 +19,10 @@ const Home = () => {
   const [filter, setFilter] = useState('');
   const [optionValue, setOptionValue] = useState(null);
 
-  const [pageNumber, setPageNumber] = useState(0);
-  const cardsPerPage = 8;
-  const pagesVisited = pageNumber * cardsPerPage;
-  const pageCount = Math.ceil(searchedCountries.length / cardsPerPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+  const [currentItems, setCurrentItems] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [forceFirstPage, setForceFirstPage] = useState(null);
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -46,6 +44,8 @@ const Home = () => {
         item.title.toLowerCase().includes(query.toLowerCase()),
       );
       setSearchedCountries(searchedData);
+      setForceFirstPage(0);
+      setItemOffset(0);
     }
   }, [query]);
 
@@ -55,8 +55,22 @@ const Home = () => {
         item.info[1].region.includes(filter),
       );
       setSearchedCountries(filteredData);
+      setForceFirstPage(0);
+      setItemOffset(0);
     }
   }, [filter]);
+
+  useEffect(() => {
+    const endOffset = itemOffset + cardsPerPage;
+    setCurrentItems(searchedCountries.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(searchedCountries.length / cardsPerPage));
+  }, [itemOffset, cardsPerPage, searchedCountries]);
+
+  const handlePageClick = (event) => {
+    const newOffset =
+      (event.selected * cardsPerPage) % searchedCountries.length;
+    setItemOffset(newOffset);
+  };
 
   if (!countries?.length) return <></>;
 
@@ -80,25 +94,21 @@ const Home = () => {
         </div>
       </PageTop>
       <CardsGrid>
-        {!!searchedCountries?.length ? (
-          searchedCountries
-            .slice(pagesVisited, pagesVisited + cardsPerPage)
-            .map((item) => <Card item={item} key={item.id} className='card' />)
-        ) : (
-          <div>No matches</div>
-        )}
+        <Items currentItems={currentItems} />
       </CardsGrid>
       <div className='page-count'>
         <ReactPaginate
           previousLabel={'Previous'}
           nextLabel={'Next'}
           pageCount={pageCount}
-          onPageChange={changePage}
+          onPageChange={handlePageClick}
+          forcePage={forceFirstPage}
           containerClassName={'paginationBttns'}
-          previousLinkClassName={'previousBttn'}
-          nextLinkClassName={'nextBttn'}
+          previousLinkClassName={'previousBtn'}
+          nextLinkClassName={'nextBtn'}
           disabledClassName={'paginationDisabled'}
           activeClassName={'paginationActive'}
+          renderOnZeroPageCount={null}
         />
       </div>
     </Page>
@@ -113,7 +123,6 @@ const Page = styled.div`
     display: flex;
     justify-content: center;
     align-content: center;
-    gap: 15px;
   }
 
   .paginationBttns a {
@@ -121,23 +130,20 @@ const Page = styled.div`
     cursor: pointer;
     border: 1px solid ${({ theme }) => theme.colors.text};
     padding: 3px 15px;
+    margin: 0 8px;
   }
 
   .paginationActive a,
   .paginationBttns a:hover {
-    background-color: ${({ theme }) => theme.colors.elements};
-    border: 3px solid ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.elements};
+    background-color: ${({ theme }) => theme.colors.text};
     font-weight: 700;
   }
 
   .paginationDisabled a {
     color: ${({ theme }) => theme.colors.outline};
-    cursor: pointer;
     border: 1px solid ${({ theme }) => theme.colors.outline};
-
-    &:hover {
-      pointer-events: none;
-    }
+    pointer-events: none;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
