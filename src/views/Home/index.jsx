@@ -133,7 +133,6 @@ const Page = styled.div`
     cursor: pointer;
     border: 1px solid ${({ theme }) => theme.colors.text};
     padding: 3px 15px;
-    /* margin: 10px 8px; */
   }
 
   .paginationActive a,
