@@ -22,7 +22,7 @@ const Home = () => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const [forceFirstPage, setForceFirstPage] = useState(null);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const handleFetchCountries = async () => {
@@ -44,7 +44,7 @@ const Home = () => {
         item.title.toLowerCase().includes(query.toLowerCase()),
       );
       setSearchedCountries(searchedData);
-      setForceFirstPage(0);
+      setPage(0);
       setItemOffset(0);
     }
   }, [query]);
@@ -55,7 +55,7 @@ const Home = () => {
         item.info[1].region.includes(filter),
       );
       setSearchedCountries(filteredData);
-      setForceFirstPage(0);
+      setPage(0);
       setItemOffset(0);
     }
   }, [filter]);
@@ -70,6 +70,7 @@ const Home = () => {
     const newOffset =
       (event.selected * cardsPerPage) % searchedCountries.length;
     setItemOffset(newOffset);
+    setPage(event.selected);
   };
 
   if (!countries?.length) return <></>;
@@ -102,7 +103,7 @@ const Home = () => {
           nextLabel={'Next'}
           pageCount={pageCount}
           onPageChange={handlePageClick}
-          forcePage={forceFirstPage}
+          forcePage={page}
           containerClassName={'paginationBttns'}
           previousLinkClassName={'previousBtn'}
           nextLinkClassName={'nextBtn'}
