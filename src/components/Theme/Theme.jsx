@@ -6,7 +6,7 @@ const defaultTheme = {
     lg: '24px',
     xlg: '32px',
   },
-  breakpoints: { mobile: '375px', desktop: '1024px' },
+  breakpoints: { mobile: '375px', tablet: '700px', desktop: '1100px' },
 };
 
 export const lightTheme = {

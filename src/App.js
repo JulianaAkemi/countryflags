@@ -9,16 +9,25 @@ import Home from './views/Home';
 import CardDetailsPage from './views/CardDetailsPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useDarkMode } from './utils/useDarkMode';
+import Grid from './components/GridSystem/Grid';
+
+import Navtest from './components/Navbar/Navtest';
 
 function App() {
   const [theme, themeToggler] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
   return (
-    <Router>
-      <ThemeProvider theme={themeMode}>
-        <GlobalStyle />
-        <Navbar switchTheme={themeToggler} />
+    <ThemeProvider theme={themeMode}>
+      <GlobalStyle />
+      <Grid>
+        <Navtest switchTheme={themeToggler} />
+      </Grid>
+
+      <Router>
+        {/* <ThemeProvider theme={themeMode}> */}
+        {/* <GlobalStyle /> */}
+        {/* <Navbar switchTheme={themeToggler} /> */}
         <Routes>
           <Route
             exact
@@ -34,8 +43,8 @@ function App() {
           <Route path='/card-details/*' element={<CardDetailsPage />} />
           <Route path='*' element={<h1>Page not found!</h1>} />
         </Routes>
-      </ThemeProvider>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 
