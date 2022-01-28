@@ -1,6 +1,6 @@
 # Countries API Project - Akemi
 
-##Trainee Front-End Development Project (React)
+## Trainee Front-End Development Project (React)
 
 In this challenge, I was provided with an API and the following(below) instructions and style guide. This project was developed by me with the mentoring of a veteran work colleague (thank you so much, Lucas!!!). We aimed exercising the use of git in a professional capacity, according with a project's specific flow and documentation, more than that, the development of generic components and a grid system were my favorite parts.
 
@@ -13,7 +13,7 @@ React Router v6
 ![page](https://user-images.githubusercontent.com/57812265/151462354-1247dd0b-d9c0-472c-a487-d90a1644512c.JPG)
 
 
-#Instructions
+# Instructions
 ## The challenge
 
 Your challenge is to integrate with our [Countries API](https://wtt-countries.herokuapp.com/) to pull country data and display it like in the designs.
