@@ -5,10 +5,12 @@
 In this challenge, I was provided with an API and the following(below) instructions and style guide. This project was developed by me with the mentoring of a veteran work colleague (thank you so much, Lucas!!!). We aimed exercising the use of git in a professional capacity, according with a project's specific flow and documentation, more than that, the development of generic components and a grid system were my favorite parts.
 
 Made with:
-React
-Styled Components
-Axios
-React Router v6
+- React
+- Styled Components
+- Axios
+- React Router v6
+
+See the project live here: https://country-flags-api.herokuapp.com/
 
 ![page](https://user-images.githubusercontent.com/57812265/151462354-1247dd0b-d9c0-472c-a487-d90a1644512c.JPG)
 
